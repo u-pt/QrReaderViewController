@@ -10,7 +10,6 @@ import AVFoundation
 
 class QrReaderViewController: UIViewController {
     @IBOutlet weak var cameraView: UIView!
-    @IBOutlet weak var detectionAreaView: UIView!
     
     var previewLayer: AVCaptureVideoPreviewLayer!
     var captureSession: AVCaptureSession!
@@ -33,12 +32,12 @@ class QrReaderViewController: UIViewController {
     }
     
     private func configureSession() {
+        // カメラの準備
         guard let captureDeviceVideo = AVCaptureDevice.default(for: .video) else {
             return
         }
         
         self.captureSession = AVCaptureSession()
-        
         var captureMetadataOutput: AVCaptureMetadataOutput
         do {
             let captureDeviceInputVideo = try AVCaptureDeviceInput(device: captureDeviceVideo)
@@ -50,27 +49,19 @@ class QrReaderViewController: UIViewController {
             if (self.captureSession.canAddOutput(captureMetadataOutput)) {
                 self.captureSession.addOutput(captureMetadataOutput)
             }
+            captureMetadataOutput.setMetadataObjectsDelegate(self, queue: .main)
+            
+            // 読み込み対象としてQRコードを指定
+            captureMetadataOutput.metadataObjectTypes = [.qr]
         } catch {
             self.captureSession = nil
             return
         }
         
-        captureMetadataOutput.setMetadataObjectsDelegate(self, queue: .main)
-        captureMetadataOutput.metadataObjectTypes = [.qr]
-        
         self.previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         self.previewLayer.frame = self.cameraView.layer.bounds
         self.previewLayer.videoGravity = .resizeAspectFill
         self.cameraView.layer.addSublayer(self.previewLayer)
-        
-        captureMetadataOutput.rectOfInterest = self.previewLayer.metadataOutputRectConverted(
-            fromLayerRect: self.detectionAreaView.frame
-        )
-        
-        self.detectionAreaView.layer.backgroundColor = UIColor.clear.cgColor
-        self.detectionAreaView.layer.borderColor = UIColor.white.cgColor
-        self.detectionAreaView.layer.borderWidth = 2
-        self.detectionAreaView.layer.cornerRadius = 10
         
         self.captureSession.startRunning()
     }
