@@ -18,19 +18,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u8F-DJ-Mt2">
                                 <rect key="frame" x="0.0" y="59" width="393" height="793"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hga-v5-Sth">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="793"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </view>
-                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="hga-v5-Sth" secondAttribute="bottom" id="IJb-X5-apO"/>
-                                    <constraint firstAttribute="trailing" secondItem="hga-v5-Sth" secondAttribute="trailing" id="Jse-lF-Dfz"/>
-                                    <constraint firstItem="hga-v5-Sth" firstAttribute="leading" secondItem="u8F-DJ-Mt2" secondAttribute="leading" id="QcE-LK-hhi"/>
-                                    <constraint firstItem="hga-v5-Sth" firstAttribute="top" secondItem="u8F-DJ-Mt2" secondAttribute="top" id="TAJ-oF-UC1"/>
-                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxe-aY-o6Y">
                                 <rect key="frame" x="138" y="743" width="117" height="35"/>
@@ -60,7 +48,6 @@
                     </view>
                     <connections>
                         <outlet property="cameraView" destination="u8F-DJ-Mt2" id="pXs-qw-6gc"/>
-                        <outlet property="detectionAreaView" destination="hga-v5-Sth" id="0Cl-Tl-q5c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
